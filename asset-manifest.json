@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/adn-website/static/css/main.9297b249.css",
+    "main.js": "/adn-website/static/js/main.c547b763.js",
+    "static/js/453.015f10ac.chunk.js": "/adn-website/static/js/453.015f10ac.chunk.js",
+    "index.html": "/adn-website/index.html",
+    "main.9297b249.css.map": "/adn-website/static/css/main.9297b249.css.map",
+    "main.c547b763.js.map": "/adn-website/static/js/main.c547b763.js.map",
+    "453.015f10ac.chunk.js.map": "/adn-website/static/js/453.015f10ac.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9297b249.css",
+    "static/js/main.c547b763.js"
+  ]
+}
