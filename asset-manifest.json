@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/adn-solutions/static/css/main.9297b249.css",
-    "main.js": "/adn-solutions/static/js/main.27f514d3.js",
-    "static/js/453.015f10ac.chunk.js": "/adn-solutions/static/js/453.015f10ac.chunk.js",
-    "index.html": "/adn-solutions/index.html",
-    "main.9297b249.css.map": "/adn-solutions/static/css/main.9297b249.css.map",
-    "main.27f514d3.js.map": "/adn-solutions/static/js/main.27f514d3.js.map",
-    "453.015f10ac.chunk.js.map": "/adn-solutions/static/js/453.015f10ac.chunk.js.map"
+    "main.css": "/static/css/main.9297b249.css",
+    "main.js": "/static/js/main.0c8d197e.js",
+    "static/js/453.015f10ac.chunk.js": "/static/js/453.015f10ac.chunk.js",
+    "index.html": "/index.html",
+    "main.9297b249.css.map": "/static/css/main.9297b249.css.map",
+    "main.0c8d197e.js.map": "/static/js/main.0c8d197e.js.map",
+    "453.015f10ac.chunk.js.map": "/static/js/453.015f10ac.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9297b249.css",
-    "static/js/main.27f514d3.js"
+    "static/js/main.0c8d197e.js"
   ]
 }
