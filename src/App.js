@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Cog, Lightbulb, TrendingUp, Mail, Menu, X } from 'lucide-react';
+import { Cog, Lightbulb, TrendingUp, Menu, X, DollarSign, Users, Zap, Globe, Shield, CheckCircle } from 'lucide-react';
 
 export default function ADNWebsite() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -74,7 +74,7 @@ export default function ADNWebsite() {
               ADN GLOBAL<br />SOLUTIONS
             </h2>
             <p className="text-2xl sm:text-3xl text-gray-300 mb-8">
-              Innovative Staffing and Consulting
+              Powered by Talent. Focused on Your Growth.
             </p>
             <button 
               onClick={() => scrollToSection('services')}
@@ -91,94 +91,248 @@ export default function ADNWebsite() {
         <div className="max-w-7xl mx-auto">
           <h3 className="text-4xl font-bold mb-8 text-center">ABOUT US</h3>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto text-center leading-relaxed">
-            ADN Global Solutions is a premier staffing and consulting firm dedicated to connecting 
-            exceptional talent with leading organizations. We specialize in innovative workforce 
-            solutions across multiple industries, delivering excellence through our comprehensive 
-            services and deep industry expertise.
+            At ADN Global Solutions, we provide U.S. and international companies with reliable, high‑communication remote professionals — across admin, support, tech, marketing, back‑office, and specialized roles — fully managed under one simple contract.
           </p>
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* What We Offer Section */}
       <section id="services" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-4xl sm:text-5xl font-bold mb-16 text-center text-yellow-600">SERVICES</h3>
+          <h3 className="text-4xl sm:text-5xl font-bold mb-4 text-center text-yellow-600">WHAT WE OFFER</h3>
+          <p className="text-xl text-gray-400 text-center mb-16">Complete Workforce Solutions</p>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Staffing Solutions */}
-            <div className="border border-gray-700 p-8 hover:border-yellow-600 transition-all duration-300 hover:transform hover:scale-105">
-              <div className="flex justify-center mb-6">
-                <Cog size={64} className="text-yellow-600" />
-              </div>
-              <h4 className="text-2xl font-bold mb-4 text-center">Staffing Solutions</h4>
-              <p className="text-gray-400 text-center">
-                Prolific coordinating expediting and scout automodulations.
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Flexible Staffing */}
+            <div className="border border-gray-700 p-6 hover:border-yellow-600 transition-all duration-300">
+              <Users className="text-yellow-600 mb-4" size={48} />
+              <h4 className="text-xl font-bold mb-3">Flexible Staffing & Outsourcing</h4>
+              <p className="text-gray-400 text-sm">
+                Whether you need a single assistant or an entire remote team, we staff any role — from entry‑level virtual assistants to senior developers, AI engineers, and specialized talent.
               </p>
             </div>
 
-            {/* Consulting Services */}
-            <div className="border border-gray-700 p-8 hover:border-yellow-600 transition-all duration-300 hover:transform hover:scale-105">
-              <div className="flex justify-center mb-6">
-                <Lightbulb size={64} className="text-yellow-600" />
-              </div>
-              <h4 className="text-2xl font-bold mb-4 text-center">Consulting Services</h4>
-              <p className="text-gray-400 text-center">
-                Provide constant shore celebrating and evasive grant assistance.
+            {/* Talent Management */}
+            <div className="border border-gray-700 p-6 hover:border-yellow-600 transition-all duration-300">
+              <Cog className="text-yellow-600 mb-4" size={48} />
+              <h4 className="text-xl font-bold mb-3">End‑to‑End Talent Management</h4>
+              <p className="text-gray-400 text-sm">
+                We handle recruiting, vetting, hiring, payroll, HR administration, time‑zone alignment, performance monitoring, and replacement guarantee. You simply get results.
               </p>
             </div>
 
-            {/* Managed Services */}
-            <div className="border border-gray-700 p-8 hover:border-yellow-600 transition-all duration-300 hover:transform hover:scale-105">
-              <div className="flex justify-center mb-6">
-                <TrendingUp size={64} className="text-yellow-600" />
-              </div>
-              <h4 className="text-2xl font-bold mb-4 text-center">Managed Services</h4>
-              <p className="text-gray-400 text-center">
-                Expendatures and communication dependencies provide analytics.
+            {/* Cost-Optimized */}
+            <div className="border border-gray-700 p-6 hover:border-yellow-600 transition-all duration-300">
+              <DollarSign className="text-yellow-600 mb-4" size={48} />
+              <h4 className="text-xl font-bold mb-3">Cost‑Optimized Remote Talent</h4>
+              <p className="text-gray-400 text-sm">
+                Cut hiring costs by 40–70% compared to U.S. hires. Get access to global talent without compromising on quality — ideal for scaling without inflating payroll.
+              </p>
+            </div>
+
+            {/* Speed & Scalability */}
+            <div className="border border-gray-700 p-6 hover:border-yellow-600 transition-all duration-300">
+              <Zap className="text-yellow-600 mb-4" size={48} />
+              <h4 className="text-xl font-bold mb-3">Speed & Scalability</h4>
+              <p className="text-gray-400 text-sm">
+                Need staff quickly? We deliver pre‑vetted candidates in as little as 48 hours. As your needs grow, we scale with you.
+              </p>
+            </div>
+
+            {/* Global Reach */}
+            <div className="border border-gray-700 p-6 hover:border-yellow-600 transition-all duration-300">
+              <Globe className="text-yellow-600 mb-4" size={48} />
+              <h4 className="text-xl font-bold mb-3">Global Reach, Unified Management</h4>
+              <p className="text-gray-400 text-sm">
+                Our global talent network (Asia, LATAM, Africa, Eastern Europe) gives you access to a vast pool of qualified professionals. We manage them under one U.S.-registered LLC.
+              </p>
+            </div>
+
+            {/* Transparent Pricing */}
+            <div className="border border-gray-700 p-6 hover:border-yellow-600 transition-all duration-300">
+              <Shield className="text-yellow-600 mb-4" size={48} />
+              <h4 className="text-xl font-bold mb-3">Transparent & Predictable Pricing</h4>
+              <p className="text-gray-400 text-sm">
+                Flat monthly rates, clear cost savings, no hidden fees, and full control over labor costs — so you can budget with confidence.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Roles Section */}
-      <section id="roles" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+      {/* Why Choose ADN */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-4xl sm:text-5xl font-bold mb-16 text-center text-yellow-600">ROLES</h3>
+          <h3 className="text-4xl font-bold mb-12 text-center text-yellow-600">Why Choose ADN</h3>
+          <p className="text-xl text-center text-gray-400 mb-12">Instead of Traditional Staffing Agencies</p>
           
-          <div className="border border-gray-700 p-8 sm:p-12">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {/* Engineering */}
-              <div className="text-center">
-                <h4 className="text-2xl font-bold mb-4">Engineering</h4>
-                <p className="text-gray-400 text-sm">
-                  Provide receptance and ongoing tolerancing.
-                </p>
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-gray-800 p-6 rounded">
+                <h4 className="text-lg font-bold mb-4 text-red-400">Traditional / On‑Prem Staffing</h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li>• High payroll + benefits costs</li>
+                  <li>• Long hiring cycles, local limitations</li>
+                  <li>• Separate HR, payroll, management systems</li>
+                  <li>• Limited talent pool / local hires only</li>
+                  <li>• High overhead & fixed costs</li>
+                </ul>
               </div>
 
-              {/* Technology */}
-              <div className="text-center">
-                <h4 className="text-2xl font-bold mb-4">Technology</h4>
-                <p className="text-gray-400 text-sm">
-                  Expertise computational prioritizing services.
-                </p>
+              <div className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/20 p-6 rounded border border-yellow-600">
+                <h4 className="text-lg font-bold mb-4 text-yellow-400">ADN Global Solutions</h4>
+                <ul className="space-y-2 text-gray-200 text-sm">
+                  <li className="flex items-start"><CheckCircle size={16} className="text-green-400 mr-2 mt-1 flex-shrink-0" /> Save 40–70% on labor costs</li>
+                  <li className="flex items-start"><CheckCircle size={16} className="text-green-400 mr-2 mt-1 flex-shrink-0" /> Hire remote talent globally; scale fast</li>
+                  <li className="flex items-start"><CheckCircle size={16} className="text-green-400 mr-2 mt-1 flex-shrink-0" /> All-in-one staffing + HR + payroll + compliance</li>
+                  <li className="flex items-start"><CheckCircle size={16} className="text-green-400 mr-2 mt-1 flex-shrink-0" /> Global talent pool: admin → tech → AI</li>
+                  <li className="flex items-start"><CheckCircle size={16} className="text-green-400 mr-2 mt-1 flex-shrink-0" /> Pay only for what you need, when you need it</li>
+                </ul>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Finance */}
-              <div className="text-center">
-                <h4 className="text-2xl font-bold mb-4">Finance</h4>
-                <p className="text-gray-400 text-sm">
-                  Provide reasoned and trusting allocations.
-                </p>
-              </div>
+      {/* Our Services - Roles */}
+      <section id="roles" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-4xl sm:text-5xl font-bold mb-4 text-center text-yellow-600">OUR SERVICES</h3>
+          <p className="text-xl text-gray-400 text-center mb-16">Full Spectrum of Remote Roles</p>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div className="bg-gray-900 border border-gray-700 p-6 hover:border-yellow-600 transition">
+              <h4 className="font-bold mb-2 text-yellow-500">Admin & Support</h4>
+              <p className="text-sm text-gray-400">Virtual Assistants, Executive Assistants</p>
+            </div>
 
-              {/* Healthcare */}
-              <div className="text-center">
-                <h4 className="text-2xl font-bold mb-4">Healthcare</h4>
-                <p className="text-gray-400 text-sm">
-                  Expert compliant and playactable envisions.
-                </p>
-              </div>
+            <div className="bg-gray-900 border border-gray-700 p-6 hover:border-yellow-600 transition">
+              <h4 className="font-bold mb-2 text-yellow-500">Customer Success</h4>
+              <p className="text-sm text-gray-400">Customer Support, Client Success, Help‑Desk</p>
+            </div>
+
+            <div className="bg-gray-900 border border-gray-700 p-6 hover:border-yellow-600 transition">
+              <h4 className="font-bold mb-2 text-yellow-500">Sales</h4>
+              <p className="text-sm text-gray-400">Sales Support, SDR, Appointment Setting, Sales Ops</p>
+            </div>
+
+            <div className="bg-gray-900 border border-gray-700 p-6 hover:border-yellow-600 transition">
+              <h4 className="font-bold mb-2 text-yellow-500">Marketing & Creative</h4>
+              <p className="text-sm text-gray-400">Social Media, Content, Design, SEO, Digital Marketing</p>
+            </div>
+
+            <div className="bg-gray-900 border border-gray-700 p-6 hover:border-yellow-600 transition">
+              <h4 className="font-bold mb-2 text-yellow-500">Finance & Accounting</h4>
+              <p className="text-sm text-gray-400">Bookkeepers, Payroll Assistants, Financial Ops</p>
+            </div>
+
+            <div className="bg-gray-900 border border-gray-700 p-6 hover:border-yellow-600 transition">
+              <h4 className="font-bold mb-2 text-yellow-500">Tech & Development</h4>
+              <p className="text-sm text-gray-400">Web Developers, Software Engineers, QA, DevOps</p>
+            </div>
+
+            <div className="bg-gray-900 border border-gray-700 p-6 hover:border-yellow-600 transition">
+              <h4 className="font-bold mb-2 text-yellow-500">Advanced / Specialized</h4>
+              <p className="text-sm text-gray-400">AI & ML Engineers, Data Scientists, Cloud Support</p>
+            </div>
+
+            <div className="bg-gray-900 border border-gray-700 p-6 hover:border-yellow-600 transition">
+              <h4 className="font-bold mb-2 text-yellow-500">Back-Office</h4>
+              <p className="text-sm text-gray-400">Business Support, Ops, Logistics, HR Assistants</p>
+            </div>
+
+            <div className="bg-gray-900 border border-gray-700 p-6 hover:border-yellow-600 transition border-2">
+              <h4 className="font-bold mb-2 text-yellow-500">Custom Roles</h4>
+              <p className="text-sm text-gray-400">Don't see your role? Just ask — we recruit for any remote position</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-4xl font-bold mb-12 text-center text-yellow-600">How ADN Works</h3>
+          <p className="text-xl text-center text-gray-400 mb-16">Simple 3‑Step Process</p>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="text-center">
+              <div className="bg-yellow-600 text-black rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+              <h4 className="text-xl font-bold mb-3">You Tell Us Who You Need</h4>
+              <p className="text-gray-400">Describe the role, skills, experience level, and workload.</p>
+            </div>
+
+            <div className="text-center">
+              <div className="bg-yellow-600 text-black rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+              <h4 className="text-xl font-bold mb-3">We Source, Vet & Onboard</h4>
+              <p className="text-gray-400">We draw from our global talent pool, test English and skills, and present 2–3 highly qualified candidates.</p>
+            </div>
+
+            <div className="text-center">
+              <div className="bg-yellow-600 text-black rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+              <h4 className="text-xl font-bold mb-3">You Select — We Handle the Rest</h4>
+              <p className="text-gray-400">We manage payroll, HR compliance, performance tracking, and guarantee replacements if needed.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Transparent Savings */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <h3 className="text-4xl font-bold mb-8 text-yellow-600">Transparent Savings & Value</h3>
+          <p className="text-lg text-gray-400 mb-12 max-w-3xl mx-auto">With ADN, companies typically see:</p>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-yellow-900/20 to-transparent p-6 rounded border border-yellow-600/30">
+              <div className="text-4xl mb-3">💡</div>
+              <h4 className="font-bold text-xl mb-2">40–70% Cost Reduction</h4>
+              <p className="text-gray-400 text-sm">Compared to hiring locally</p>
+            </div>
+
+            <div className="bg-gradient-to-br from-yellow-900/20 to-transparent p-6 rounded border border-yellow-600/30">
+              <div className="text-4xl mb-3">🕒</div>
+              <h4 className="font-bold text-xl mb-2">Faster Hiring Cycles</h4>
+              <p className="text-gray-400 text-sm">Get resources in days, not months</p>
+            </div>
+
+            <div className="bg-gradient-to-br from-yellow-900/20 to-transparent p-6 rounded border border-yellow-600/30">
+              <div className="text-4xl mb-3">📈</div>
+              <h4 className="font-bold text-xl mb-2">Scalable Workforce</h4>
+              <p className="text-gray-400 text-sm">Add or remove roles as needed</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Compliance */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <h3 className="text-4xl font-bold mb-12 text-center text-yellow-600">Trust, Compliance & Peace of Mind</h3>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            <div className="text-center p-6">
+              <Shield className="text-yellow-600 mx-auto mb-4" size={48} />
+              <h4 className="font-bold mb-2">U.S.-Registered LLC</h4>
+              <p className="text-sm text-gray-400">Wyoming-based for legitimacy</p>
+            </div>
+
+            <div className="text-center p-6">
+              <Globe className="text-yellow-600 mx-auto mb-4" size={48} />
+              <h4 className="font-bold mb-2">Global Talent</h4>
+              <p className="text-sm text-gray-400">Vetted, managed, supported</p>
+            </div>
+
+            <div className="text-center p-6">
+              <CheckCircle className="text-yellow-600 mx-auto mb-4" size={48} />
+              <h4 className="font-bold mb-2">Clear Contracts</h4>
+              <p className="text-sm text-gray-400">Monthly billing, full transparency</p>
+            </div>
+
+            <div className="text-center p-6">
+              <Lightbulb className="text-yellow-600 mx-auto mb-4" size={48} />
+              <h4 className="font-bold mb-2">Data Protection</h4>
+              <p className="text-sm text-gray-400">Confidentiality assured</p>
             </div>
           </div>
         </div>
@@ -187,7 +341,10 @@ export default function ADNWebsite() {
       {/* Contact Section */}
       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h3 className="text-4xl sm:text-5xl font-bold mb-16 text-center text-yellow-600">CONTACT US</h3>
+          <h3 className="text-4xl sm:text-5xl font-bold mb-4 text-center text-yellow-600">READY TO GROW SMARTER?</h3>
+          <p className="text-lg text-gray-400 text-center mb-12 max-w-3xl mx-auto">
+            Whether you're a small startup, a growing agency, or an established enterprise — ADN Global Solutions offers a smarter, leaner way to build your team.
+          </p>
           
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             {/* Left Form */}
@@ -235,7 +392,7 @@ export default function ADNWebsite() {
                 onClick={handleSubmit}
                 className="bg-yellow-700 hover:bg-yellow-600 text-white px-8 py-3 rounded transition-colors font-semibold"
               >
-                SEND MESSAGE
+                GET IN TOUCH
               </button>
             </div>
           </div>
@@ -245,7 +402,7 @@ export default function ADNWebsite() {
       {/* Footer */}
       <footer className="bg-gray-900 py-8 px-4 border-t border-gray-800">
         <div className="max-w-7xl mx-auto text-center text-gray-400">
-          <p>&copy; 2024 ADN Global Solutions. All rights reserved.</p>
+          <p>&copy; 2025 ADN Global Solutions. All rights reserved.</p>
         </div>
       </footer>
     </div>
