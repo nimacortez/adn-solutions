@@ -9,11 +9,31 @@ export default function ADNWebsite() {
     subject: '',
     message: ''
   });
+  const [submitStatus, setSubmitStatus] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Message sent! (This is a demo - connect to a backend to make it functional)');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setSubmitStatus('sending');
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xgvglnqy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setSubmitStatus(''), 3000);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    }
   };
 
   const handleChange = (e) => {
@@ -347,15 +367,16 @@ export default function ADNWebsite() {
           </p>
           
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {/* Left Form */}
-            <div>
+            {/* Contact Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
               <input
                 type="text"
                 name="name"
                 placeholder="Name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full bg-transparent border border-gray-700 px-4 py-3 mb-4 focus:border-yellow-600 focus:outline-none"
+                required
+                className="w-full bg-transparent border border-gray-700 px-4 py-3 focus:border-yellow-600 focus:outline-none"
               />
               <input
                 type="email"
@@ -363,7 +384,8 @@ export default function ADNWebsite() {
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-transparent border border-gray-700 px-4 py-3 mb-4 focus:border-yellow-600 focus:outline-none"
+                required
+                className="w-full bg-transparent border border-gray-700 px-4 py-3 focus:border-yellow-600 focus:outline-none"
               />
               <input
                 type="text"
@@ -373,27 +395,45 @@ export default function ADNWebsite() {
                 onChange={handleChange}
                 className="w-full bg-transparent border border-gray-700 px-4 py-3 focus:border-yellow-600 focus:outline-none"
               />
-            </div>
-
-            {/* Right Form */}
-            <div>
-              <h4 className="text-xl mb-4">Send Message</h4>
-              <input
-                type="text"
-                placeholder="Name"
-                className="w-full bg-transparent border border-gray-700 px-4 py-3 mb-4 focus:border-yellow-600 focus:outline-none"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full bg-transparent border border-gray-700 px-4 py-3 mb-6 focus:border-yellow-600 focus:outline-none"
+              <textarea
+                name="message"
+                placeholder="Message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows="4"
+                className="w-full bg-transparent border border-gray-700 px-4 py-3 focus:border-yellow-600 focus:outline-none"
               />
               <button
-                onClick={handleSubmit}
-                className="bg-yellow-700 hover:bg-yellow-600 text-white px-8 py-3 rounded transition-colors font-semibold"
+                type="submit"
+                disabled={submitStatus === 'sending'}
+                className="bg-yellow-700 hover:bg-yellow-600 text-white px-8 py-3 rounded transition-colors font-semibold disabled:opacity-50"
               >
-                GET IN TOUCH
+                {submitStatus === 'sending' ? 'SENDING...' : 'GET IN TOUCH'}
               </button>
+              
+              {submitStatus === 'success' && (
+                <p className="text-green-400 text-sm">✓ Message sent successfully! We'll be in touch!</p>
+              )}
+              {submitStatus === 'error' && (
+                <p className="text-red-400 text-sm">✗ Failed to send. Please try again.</p>
+              )}
+            </form>
+
+            {/* Contact Info */}
+            <div>
+              <h4 className="text-xl mb-4">Get Started Today</h4>
+              <p className="text-gray-400 mb-6">
+                Fill out the form and we'll get back to you within 24 hours to discuss your staffing needs.
+              </p>
+              <div className="space-y-4">
+                <div>
+                  <h5 className="font-bold text-yellow-500 mb-1">Email</h5>
+                  <a href="mailto:Info@adnglobalsolutions.com" className="text-gray-300 hover:text-yellow-500">
+                    Info@adnglobalsolutions.com
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -402,7 +442,7 @@ export default function ADNWebsite() {
       {/* Footer */}
       <footer className="bg-gray-900 py-8 px-4 border-t border-gray-800">
         <div className="max-w-7xl mx-auto text-center text-gray-400">
-          <p>&copy; 2025 ADN Global Solutions. All rights reserved.</p>
+          <p>&copy; 2024 ADN Global Solutions. All rights reserved.</p>
         </div>
       </footer>
     </div>
