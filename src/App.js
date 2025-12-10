@@ -53,14 +53,30 @@ export default function ADNWebsite() {
     setCurrentPage(page);
     setMobileMenuOpen(false);
     window.scrollTo(0, 0);
+    if (page === 'privacy') {
+      window.location.hash = '#/privacy';
+    } else {
+      window.location.hash = '';
+    }
   };
 
   // Check URL on mount
   React.useEffect(() => {
-    const path = window.location.pathname;
-    if (path.includes('/privacy')) {
+    const hash = window.location.hash;
+    if (hash === '#/privacy') {
       setCurrentPage('privacy');
     }
+    
+    const handleHashChange = () => {
+      if (window.location.hash === '#/privacy') {
+        setCurrentPage('privacy');
+      } else {
+        setCurrentPage('home');
+      }
+    };
+    
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   // Privacy Policy Page Component
