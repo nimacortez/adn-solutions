@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Cog, Lightbulb, TrendingUp, Menu, X, DollarSign, Users, Zap, Globe, Shield, CheckCircle } from 'lucide-react';
+import FAQ from './FAQ';
+import Terms from './TermsAndConditions';
+import About from './About';
+import Footer from './Footer';
 
 export default function ADNWebsite() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -55,29 +59,48 @@ export default function ADNWebsite() {
     window.scrollTo(0, 0);
     if (page === 'privacy') {
       window.location.hash = '#/privacy';
+    } else if (page === 'faq') {
+      window.location.hash = '#/faq';
+    } else if (page === 'terms') {
+      window.location.hash = '#/terms';
+    } else if (page === 'about-page') {
+      window.location.hash = '#/about';
     } else {
       window.location.hash = '';
     }
   };
 
-  // Check URL on mount
-  React.useEffect(() => {
-    const hash = window.location.hash;
-    if (hash === '#/privacy') {
+// Check URL on mount
+React.useEffect(() => {
+  const hash = window.location.hash;
+  if (hash === '#/privacy') {
+    setCurrentPage('privacy');
+  } else if (hash === '#/faq') {
+    setCurrentPage('faq');
+  } else if (hash === '#/terms') {
+    setCurrentPage('terms');
+  } else if (hash === '#/about') {
+    setCurrentPage('about-page');
+  }
+  
+  const handleHashChange = () => {
+    const newHash = window.location.hash;
+    if (newHash === '#/privacy') {
       setCurrentPage('privacy');
+    } else if (newHash === '#/faq') {
+      setCurrentPage('faq');
+    } else if (newHash === '#/terms') {
+      setCurrentPage('terms');
+    } else if (newHash === '#/about') {
+      setCurrentPage('about-page');
+    } else {
+      setCurrentPage('home');
     }
-    
-    const handleHashChange = () => {
-      if (window.location.hash === '#/privacy') {
-        setCurrentPage('privacy');
-      } else {
-        setCurrentPage('home');
-      }
-    };
-    
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  };
+  
+  window.addEventListener('hashchange', handleHashChange);
+  return () => window.removeEventListener('hashchange', handleHashChange);
+}, []);
 
   // Privacy Policy Page Component
   const PrivacyPage = () => (
@@ -99,7 +122,7 @@ export default function ADNWebsite() {
       <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl font-bold mb-8">Privacy Policy</h1>
-          <p className="text-gray-400 mb-8">Last Updated: December 8, 2024</p>
+          <p className="text-gray-400 mb-8">Last Updated: December 12, 2025</p>
 
           <div className="space-y-8 text-gray-300">
             <section>
@@ -226,16 +249,25 @@ export default function ADNWebsite() {
         </div>
       </div>
 
-      <footer className="bg-gray-900 py-8 px-4 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto text-center text-gray-400">
-          <p>&copy; 2024 ADN Global Solutions. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer onNavigate={navigateToPage} />
     </div>
   );
 
+  // Check current page and render appropriate component
   if (currentPage === 'privacy') {
     return <PrivacyPage />;
+  }
+
+  if (currentPage === 'faq') {
+    return <FAQ onNavigateHome={() => navigateToPage('home')} navigateToPage={navigateToPage} />;
+  }
+
+  if (currentPage === 'terms') {
+    return <Terms onNavigateHome={() => navigateToPage('home')} navigateToPage={navigateToPage} />;
+  }
+
+  if (currentPage === 'about-page') {
+    return <About onNavigateHome={() => navigateToPage('home')} navigateToPage={navigateToPage} />;
   }
 
   return (
@@ -244,9 +276,12 @@ export default function ADNWebsite() {
       <nav className="fixed w-full bg-black/95 backdrop-blur-sm z-50 border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <div className="flex items-center">
-              <h1 className="text-3xl font-bold">ADN</h1>
-              <span className="text-xs text-gray-400 ml-2">Global Solutions</span>
+            <div className="flex items-center gap-3">
+              <img src="/main_logo.jpeg" alt="ADN Logo" className="h-12 w-12 rounded" />
+              <div>
+                <h1 className="text-3xl font-bold">ADN</h1>
+                <span className="text-xs text-gray-400">Global Solutions</span>
+              </div>
             </div>
             
             {/* Desktop Menu */}
@@ -282,19 +317,22 @@ export default function ADNWebsite() {
       {/* Hero Section */}
       <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-black to-gray-900">
         <div className="max-w-7xl mx-auto">
-          <div className="max-w-3xl">
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              ADN GLOBAL<br />SOLUTIONS
-            </h2>
-            <p className="text-2xl sm:text-3xl text-gray-300 mb-8">
-              Powered by Talent. Focused on Your Growth.
-            </p>
-            <button 
-              onClick={() => scrollToSection('services')}
-              className="bg-yellow-700 hover:bg-yellow-600 text-white px-8 py-3 rounded transition-colors font-semibold"
-            >
-              LEARN MORE
-            </button>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex-1">
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                ADN GLOBAL<br />SOLUTIONS
+              </h2>
+              <p className="text-2xl sm:text-3xl text-gray-300 mb-8">
+                Powered by Talent. Focused on Your Growth.
+              </p>
+              <button 
+                onClick={() => scrollToSection('services')}
+                className="bg-yellow-700 hover:bg-yellow-600 text-white px-8 py-3 rounded transition-colors font-semibold"
+              >
+                LEARN MORE
+              </button>
+            </div>
+            <img src="/main_logo.jpeg" alt="ADN Global Solutions Logo" className="w-80 h-80 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px] rounded-lg flex-shrink-0" />
           </div>
         </div>
       </section>
@@ -632,18 +670,38 @@ export default function ADNWebsite() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 py-8 px-4 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto text-center text-gray-400">
-          <p>&copy; 2024 ADN Global Solutions. All rights reserved.</p>
+    {/* Footer */}
+    <footer className="bg-gray-900 py-8 px-4 border-t border-gray-800">
+      <div className="max-w-7xl mx-auto text-center text-gray-400">
+        <p>&copy; 2025 ADN Global Solutions. All rights reserved.</p>
+        <div className="flex justify-center gap-6 mt-4 text-sm">
+          <button 
+            onClick={() => navigateToPage('about-page')} 
+            className="text-yellow-600 hover:text-yellow-500"
+          >
+            About Us
+          </button>
+          <button 
+            onClick={() => navigateToPage('faq')} 
+            className="text-yellow-600 hover:text-yellow-500"
+          >
+            FAQ
+          </button>
+          <button 
+            onClick={() => navigateToPage('terms')} 
+            className="text-yellow-600 hover:text-yellow-500"
+          >
+            Terms & Conditions
+          </button>
           <button 
             onClick={() => navigateToPage('privacy')} 
-            className="text-yellow-600 hover:text-yellow-500 mt-2 text-sm"
+            className="text-yellow-600 hover:text-yellow-500"
           >
             Privacy Policy
           </button>
         </div>
-      </footer>
+      </div>
+    </footer>
     </div>
   );
 }
