@@ -1,20 +1,22 @@
-import React from 'react';
+import React from 'react'; 
+import { useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 
-export default function Terms({ onNavigateHome, navigateToPage }) {
+export default function Terms() {
+  const navigate = useNavigate();
   return (
     <div className="bg-black text-white min-h-screen">
       <nav className="fixed w-full bg-black/95 backdrop-blur-sm z-50 border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <div className="flex items-center gap-3 cursor-pointer" onClick={onNavigateHome}>
+            <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
               <img src="/main_logo.jpeg" alt="ADN Logo" className="h-12 w-12 rounded" />
               <div>
                 <h1 className="text-3xl font-bold">ADN</h1>
                 <span className="text-xs text-gray-400">Global Solutions</span>
               </div>
             </div>
-            <button onClick={onNavigateHome} className="text-yellow-600 hover:text-yellow-500">
+            <button onClick={() => navigate('/')} className="text-yellow-600 hover:text-yellow-500">
               Back to Home
             </button>
           </div>
@@ -48,7 +50,7 @@ export default function Terms({ onNavigateHome, navigateToPage }) {
         </div>
       </div>
 
-      <Footer onNavigate={navigateToPage} />
+      <Footer />
     </div>
   );
 }

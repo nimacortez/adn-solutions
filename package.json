@@ -10,6 +10,7 @@
     "lucide-react": "^0.556.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
+    "react-router-dom": "^7.10.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -45,5 +46,5 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.3.0"
   },
-     "homepage": "https://www.adnglobalsolutions.com"
+  "homepage": "https://www.adnglobalsolutions.com"
 }

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { ChevronRight, ChevronLeft, CheckCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-export default function ClientIntake({ onNavigateHome, navigateToPage }) {
+export default function ClientIntake() {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     // Step 1 - Business Information
@@ -146,7 +148,7 @@ export default function ClientIntake({ onNavigateHome, navigateToPage }) {
           setSubmitStatus('success');
           setTimeout(() => {
             alert('Thank you! Your client intake form has been submitted. We will contact you within 24 hours.');
-            onNavigateHome();
+            navigate('/')
           }, 1500);
         } else {
           setSubmitStatus('error');
@@ -170,11 +172,11 @@ export default function ClientIntake({ onNavigateHome, navigateToPage }) {
       <nav className="fixed w-full bg-black/95 backdrop-blur-sm z-50 border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            <div className="flex items-center cursor-pointer" onClick={onNavigateHome}>
+            <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
               <h1 className="text-3xl font-bold">ADN</h1>
               <span className="text-xs text-gray-400 ml-2">Global Solutions</span>
             </div>
-            <button onClick={onNavigateHome} className="text-yellow-600 hover:text-yellow-500 transition">
+            <button onClick={() => navigate('/')} className="text-yellow-600 hover:text-yellow-500 transition">
               Back to Home
             </button>
           </div>
