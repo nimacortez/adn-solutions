@@ -59,13 +59,15 @@ export default function ADNWebsite() {
     setMobileMenuOpen(false);
     window.scrollTo(0, 0);
     if (page === 'privacy') {
-      window.location.hash = '#/privacy';
+      window.location.hash = 'privacy';
     } else if (page === 'faq') {
-      window.location.hash = '#/faq';
+      window.location.hash = 'faq';
     } else if (page === 'terms') {
-      window.location.hash = '#/terms';
+      window.location.hash = 'terms';
     } else if (page === 'about-page') {
-      window.location.hash = '#/about';
+      window.location.hash = 'about';
+    } else if (page === 'clientintake') {
+      window.location.hash = 'client-intake';
     } else {
       window.location.hash = '';
     }
@@ -73,27 +75,31 @@ export default function ADNWebsite() {
 
 // Check URL on mount
 React.useEffect(() => {
-  const hash = window.location.hash;
-  if (hash === '#/privacy') {
+  const hash = window.location.hash.replace('#', '');  // Remove the # symbol
+  if (hash === 'privacy') {
     setCurrentPage('privacy');
-  } else if (hash === '#/faq') {
+  } else if (hash === 'faq') {
     setCurrentPage('faq');
-  } else if (hash === '#/terms') {
+  } else if (hash === 'terms') {
     setCurrentPage('terms');
-  } else if (hash === '#/about') {
+  } else if (hash === 'about') {
     setCurrentPage('about-page');
+  } else if (hash === 'client-intake') {
+    setCurrentPage('clientintake');
   }
   
   const handleHashChange = () => {
-    const newHash = window.location.hash;
-    if (newHash === '#/privacy') {
+    const newHash = window.location.hash.replace('#', '');
+    if (newHash === 'privacy') {
       setCurrentPage('privacy');
-    } else if (newHash === '#/faq') {
+    } else if (newHash === 'faq') {
       setCurrentPage('faq');
-    } else if (newHash === '#/terms') {
+    } else if (newHash === 'terms') {
       setCurrentPage('terms');
-    } else if (newHash === '#/about') {
+    } else if (newHash === 'about') {
       setCurrentPage('about-page');
+    } else if (newHash === 'client-intake') {
+      setCurrentPage('clientintake');
     } else {
       setCurrentPage('home');
     }
@@ -102,6 +108,7 @@ React.useEffect(() => {
   window.addEventListener('hashchange', handleHashChange);
   return () => window.removeEventListener('hashchange', handleHashChange);
 }, []);
+
 
   // Privacy Policy Page Component
   const PrivacyPage = () => (
