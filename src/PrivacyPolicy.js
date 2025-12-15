@@ -21,7 +21,7 @@ export default function PrivacyPolicy({ onNavigateHome, navigateToPage }) {
       <div className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl font-bold mb-8">Privacy Policy</h1>
-          <p className="text-gray-400 mb-8">Last Updated: December 8, 2024</p>
+          <p className="text-gray-400 mb-8">Last Updated: December 2025</p>
 
           <div className="space-y-8 text-gray-300">
             <section>

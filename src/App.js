@@ -4,6 +4,7 @@ import FAQ from './FAQ';
 import Terms from './TermsAndConditions';
 import About from './About';
 import Footer from './Footer';
+import ClientIntake from './ClientIntake';
 
 export default function ADNWebsite() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -270,6 +271,10 @@ React.useEffect(() => {
     return <About onNavigateHome={() => navigateToPage('home')} navigateToPage={navigateToPage} />;
   }
 
+  if (currentPage === 'clientintake') {
+    return <ClientIntake onNavigateHome={() => navigateToPage('home')} navigateToPage={navigateToPage} />;
+  }
+
   return (
     <div className="bg-black text-white min-h-screen">
       {/* Navigation */}
@@ -284,14 +289,60 @@ React.useEffect(() => {
               </div>
             </div>
             
+          {/* Navigation */}
+          <nav className="fixed w-full bg-black/95 backdrop-blur-sm z-50 border-b border-gray-800">
+                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center h-20">
+                      <div className="flex items-center gap-3">
+                        <img src="/main_logo.jpeg" alt="ADN Logo" className="h-12 w-12 rounded" />
+                        <div>
+                          <h1 className="text-3xl font-bold">ADN</h1>
+                          <span className="text-xs text-gray-400">Global Solutions</span>
+                        </div>
+                      </div>
+            
             {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
-              <button onClick={() => scrollToSection('home')} className="hover:text-yellow-600 transition">HOME</button>
-              <button onClick={() => scrollToSection('about')} className="hover:text-yellow-600 transition">ABOUT</button>
-              <button onClick={() => scrollToSection('services')} className="hover:text-yellow-600 transition">SERVICES</button>
-              <button onClick={() => scrollToSection('roles')} className="hover:text-yellow-600 transition">ROLES</button>
-              <button onClick={() => scrollToSection('contact')} className="hover:text-yellow-600 transition">CONTACT</button>
-            </div>
+        <div className="hidden md:flex space-x-8 items-center">
+                      <button onClick={() => scrollToSection('home')} className="hover:text-yellow-600 transition">HOME</button>
+                      <button onClick={() => scrollToSection('about')} className="hover:text-yellow-600 transition">ABOUT</button>
+                      <button onClick={() => scrollToSection('services')} className="hover:text-yellow-600 transition">SERVICES</button>
+                      <button onClick={() => scrollToSection('roles')} className="hover:text-yellow-600 transition">ROLES</button>
+                      <button onClick={() => scrollToSection('contact')} className="hover:text-yellow-600 transition">CONTACT</button>
+                      <button 
+                        onClick={() => navigateToPage('clientintake')} 
+                        className="bg-yellow-600 hover:bg-yellow-500 text-black px-4 py-2 rounded font-semibold transition ml-2"
+                      >
+                        GET STARTED
+                      </button>
+                    </div>
+
+            {/* Mobile Menu Button */}
+            <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+
+            {/* Mobile Menu */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-gray-900 border-t border-gray-800">
+                <div className="px-4 py-4 space-y-4">
+                  <button onClick={() => scrollToSection('home')} className="block w-full text-left hover:text-yellow-600">HOME</button>
+                  <button onClick={() => scrollToSection('about')} className="block w-full text-left hover:text-yellow-600">ABOUT</button>
+                  <button onClick={() => scrollToSection('services')} className="block w-full text-left hover:text-yellow-600">SERVICES</button>
+                  <button onClick={() => scrollToSection('roles')} className="block w-full text-left hover:text-yellow-600">ROLES</button>
+                  <button onClick={() => scrollToSection('contact')} className="block w-full text-left hover:text-yellow-600">CONTACT</button>
+                  {/* Add GET STARTED to mobile menu too */}
+                  <button 
+                    onClick={() => navigateToPage('clientintake')} 
+                    className="block w-full text-left bg-yellow-600 hover:bg-yellow-500 text-black px-4 py-2 rounded font-semibold transition mt-2"
+                  >
+                    GET STARTED
+                  </button>
+                </div>
+              </div>
+            )}
+          </nav>
 
             {/* Mobile Menu Button */}
             <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -314,28 +365,36 @@ React.useEffect(() => {
         )}
       </nav>
 
-      {/* Hero Section */}
-      <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-black to-gray-900">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex-1">
-              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                ADN GLOBAL<br />SOLUTIONS
-              </h2>
-              <p className="text-2xl sm:text-3xl text-gray-300 mb-8">
-                Powered by Talent. Focused on Your Growth.
-              </p>
-              <button 
-                onClick={() => scrollToSection('services')}
-                className="bg-yellow-700 hover:bg-yellow-600 text-white px-8 py-3 rounded transition-colors font-semibold"
-              >
-                LEARN MORE
-              </button>
-            </div>
-            <img src="/main_logo.jpeg" alt="ADN Global Solutions Logo" className="w-80 h-80 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px] rounded-lg flex-shrink-0" />
-          </div>
-        </div>
-      </section>
+        {/* Hero Section */}
+        <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+                <div className="max-w-7xl mx-auto">
+                  <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div className="flex-1">
+                      <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                        ADN GLOBAL<br />SOLUTIONS
+                      </h2>
+                      <p className="text-2xl sm:text-3xl text-gray-300 mb-8">
+                        Powered by Talent. Focused on Your Growth.
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <button 
+                          onClick={() => navigateToPage('clientintake')}
+                          className="bg-yellow-600 hover:bg-yellow-500 text-black px-8 py-3 rounded transition-colors font-semibold text-lg"
+                        >
+                          GET STARTED →
+                        </button>
+                        <button 
+                          onClick={() => scrollToSection('services')}
+                          className="bg-transparent border-2 border-gray-700 hover:border-yellow-600 text-white px-8 py-3 rounded transition-colors font-semibold"
+                        >
+                          LEARN MORE
+                        </button>
+                      </div>
+                    </div>
+                    <img src="/main_logo.jpeg" alt="ADN Global Solutions Logo" className="w-80 h-80 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px] rounded-lg flex-shrink-0" />
+                  </div>
+                </div>
+              </section>
 
       {/* About Section */}
       <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
@@ -528,6 +587,22 @@ React.useEffect(() => {
         </div>
       </section>
 
+      {/* Second Get Started Button */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-yellow-900/20 to-yellow-800/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-3xl font-bold mb-4">Ready to Build Your Team?</h3>
+          <p className="text-gray-400 mb-8 text-lg">
+            Complete our client intake form and we'll get back to you within 24 hours with tailored recommendations.
+          </p>
+          <button 
+            onClick={() => navigateToPage('clientintake')}
+            className="bg-yellow-600 hover:bg-yellow-500 text-black px-10 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105"
+          >
+            Start Your Intake Form →
+          </button>
+        </div>
+      </section>
+
       {/* Transparent Savings */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
@@ -589,14 +664,41 @@ React.useEffect(() => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
+{/* Contact Section */}
+<section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h3 className="text-4xl sm:text-5xl font-bold mb-4 text-center text-yellow-600">READY TO GROW SMARTER?</h3>
           <p className="text-lg text-gray-400 text-center mb-12 max-w-3xl mx-auto">
             Whether you're a small startup, a growing agency, or an established enterprise — ADN Global Solutions offers a smarter, leaner way to build your team.
           </p>
           
+          {/* Choice Section */}
+          <div className="max-w-5xl mx-auto mb-12 grid md:grid-cols-2 gap-6">
+            <div className="border-2 border-yellow-600 rounded-lg p-8 text-center hover:bg-yellow-600/5 transition">
+              <h4 className="text-2xl font-bold mb-3">Ready to Hire?</h4>
+              <p className="text-gray-400 mb-6">
+                Complete our detailed intake form to help us understand your exact staffing needs.
+              </p>
+              <button 
+                onClick={() => navigateToPage('clientintake')}
+                className="bg-yellow-600 hover:bg-yellow-500 text-black px-8 py-3 rounded font-bold w-full transition"
+              >
+                Start Intake Form →
+              </button>
+            </div>
+            
+            <div className="border border-gray-700 rounded-lg p-8 text-center hover:border-yellow-600/50 transition">
+              <h4 className="text-2xl font-bold mb-3">Have Questions?</h4>
+              <p className="text-gray-400 mb-6">
+                Send us a quick message and we'll get back to you within 24 hours.
+              </p>
+              <div className="text-gray-300 text-sm">
+                Scroll down for quick contact form
+              </div>
+            </div>
+          </div>
+          
+          {/* Existing Contact Form */}
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             {/* Contact Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
