@@ -394,64 +394,6 @@ export default function TalentApplication() {
                     </div>
                   </div>
                 </div>
-
-                <div className="border-t border-gray-700 pt-6">
-                  <h3 className="text-xl font-bold mb-4">Documentation</h3>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Professional Photo *</label>
-                    <div className="border-2 border-dashed border-gray-700 rounded-lg p-6 text-center hover:border-yellow-600 transition cursor-pointer">
-                      <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                      <p className="text-sm text-gray-400 mb-2">Click to upload or drag and drop</p>
-                      <p className="text-xs text-gray-500">JPG, PNG (MAX. 5MB)</p>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => handleFileUpload('professionalPhoto', e.target.files[0])}
-                        className="hidden"
-                      />
-                    </div>
-                    {formData.professionalPhoto && (
-                      <p className="text-sm text-green-400 mt-2">✓ {formData.professionalPhoto.name}</p>
-                    )}
-                  </div>
-
-                  <div className="mt-6">
-                    <label className="block text-sm font-medium mb-2">Citizen Identification/Driver's License *</label>
-                    <div className="border-2 border-dashed border-gray-700 rounded-lg p-6 text-center hover:border-yellow-600 transition cursor-pointer">
-                      <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                      <p className="text-sm text-gray-400 mb-2">Upload ID or Driver's License</p>
-                      <p className="text-xs text-gray-500">PDF, JPG, PNG (MAX. 5MB)</p>
-                      <input
-                        type="file"
-                        accept="image/*,.pdf"
-                        onChange={(e) => handleFileUpload('identification', e.target.files[0])}
-                        className="hidden"
-                      />
-                    </div>
-                    {formData.identification && (
-                      <p className="text-sm text-green-400 mt-2">✓ {formData.identification.name}</p>
-                    )}
-                  </div>
-
-                  <div className="mt-6">
-                    <label className="block text-sm font-medium mb-2">Passport (if applicable)</label>
-                    <div className="border-2 border-dashed border-gray-700 rounded-lg p-6 text-center hover:border-yellow-600 transition cursor-pointer">
-                      <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                      <p className="text-sm text-gray-400 mb-2">Upload Passport</p>
-                      <p className="text-xs text-gray-500">PDF, JPG, PNG (MAX. 5MB)</p>
-                      <input
-                        type="file"
-                        accept="image/*,.pdf"
-                        onChange={(e) => handleFileUpload('passport', e.target.files[0])}
-                        className="hidden"
-                      />
-                    </div>
-                    {formData.passport && (
-                      <p className="text-sm text-green-400 mt-2">✓ {formData.passport.name}</p>
-                    )}
-                  </div>
-                </div>
               </div>
             )}
 
@@ -1293,7 +1235,7 @@ export default function TalentApplication() {
 
                 <div className="bg-yellow-600/10 border border-yellow-600/30 rounded-lg p-4">
                   <p className="text-sm text-yellow-600">
-                    By submitting this application, you consent to ADN Global Solutions storing and processing your personal information for recruitment purposes. We will contact you within 3-5 business days to discuss potential opportunities.
+                    By submitting this application, you consent to ADN Global Solutions storing and processing your personal information for recruitment purposes. We will contact you soon if we see a fit!
                   </p>
                 </div>
               </div>
