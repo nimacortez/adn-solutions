@@ -6,8 +6,9 @@ import Terms from './TermsAndConditions';
 import About from './About';
 import Footer from './Footer';
 import ClientIntake from './ClientIntake';
+import TalentApplication from './TalentApplication';
 
-// Home Page Component
+// Home Page
 function HomePage() {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -123,19 +124,25 @@ function HomePage() {
                 Powered by Talent. Focused on Your Growth.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button 
-                  onClick={() => navigate('/client-intake')}
-                  className="bg-yellow-600 hover:bg-yellow-500 text-black px-8 py-3 rounded transition-colors font-semibold text-lg"
-                >
-                  GET STARTED →
-                </button>
-                <button 
-                  onClick={() => scrollToSection('services')}
-                  className="bg-transparent border-2 border-gray-700 hover:border-yellow-600 text-white px-8 py-3 rounded transition-colors font-semibold"
-                >
-                  LEARN MORE
-                </button>
-              </div>
+              <button 
+                onClick={() => navigate('/client-intake')}
+                className="bg-yellow-600 hover:bg-yellow-500 text-black px-8 py-3 rounded transition-colors font-semibold text-lg"
+              >
+                GET STARTED →
+              </button>
+              <button 
+                onClick={() => navigate('/join-talent')}
+                className="bg-transparent border-2 border-yellow-600 hover:bg-yellow-600 hover:text-black text-yellow-600 px-8 py-3 rounded transition-colors font-semibold text-lg"
+              >
+                WORK WITH US →
+              </button>
+              <button 
+                onClick={() => scrollToSection('services')}
+                className="bg-transparent border-2 border-gray-700 hover:border-yellow-600 text-white px-8 py-3 rounded transition-colors font-semibold"
+              >
+                LEARN MORE
+              </button>
+            </div>
             </div>
             <img src="/main_logo.jpeg" alt="ADN Global Solutions Logo" className="w-80 h-80 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px] rounded-lg flex-shrink-0" />
           </div>
@@ -687,6 +694,7 @@ export default function ADNWebsite() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/about" element={<About />} />
         <Route path="/client-intake" element={<ClientIntake />} />
+        <Route path="/join-talent" element={<TalentApplication />} />
       </Routes>
     </Router>
   );

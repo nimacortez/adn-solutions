@@ -1,0 +1,1343 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ChevronRight, ChevronLeft, Upload, Plus, X, CheckCircle, Globe, Briefcase, Award, GraduationCap } from 'lucide-react';
+
+export default function TalentApplication() {
+  const navigate = useNavigate();
+  const [currentStep, setCurrentStep] = useState(1);
+  const [formData, setFormData] = useState({
+    // Step 1: Personal Information
+    fullName: '',
+    age: '',
+    email: '',
+    phone: '',
+    whatsapp: '',
+    countryOfBirth: '',
+    houseApt: '',
+    streetName: '',
+    city: '',
+    state: '',
+    country: '',
+    professionalPhoto: null,
+    identification: null,
+    passport: null,
+    
+    // Step 2: Languages
+    languages: [{ language: '', proficiency: '' }],
+    
+    // Step 3: Education
+    education: [{
+      schoolName: '',
+      levelOfEducation: '',
+      degree: '',
+      fieldOfStudy: '',
+      graduationYear: '',
+      stillEnrolled: false
+    }],
+    
+    // Step 4: Certifications
+    certifications: [{
+      certificationName: '',
+      issuingOrganization: '',
+      issueDate: '',
+      expirationDate: '',
+      credentialID: '',
+      certificateFile: null
+    }],
+    
+    // Step 5: Professional Experience
+    currentlyEmployed: '',
+    totalYearsExperience: '',
+    primaryIndustry: '',
+    primaryRole: '',
+    keySkills: '',
+    technicalSkills: '',
+    softSkills: '',
+    toolsAndSoftware: '',
+    
+    // Step 6: Work History
+    workHistory: [{
+      companyName: '',
+      jobTitle: '',
+      employmentType: '',
+      location: '',
+      startDate: '',
+      endDate: '',
+      currentlyWorking: false,
+      responsibilities: '',
+      achievements: '',
+      referenceName: '',
+      referenceTitle: '',
+      referenceEmail: '',
+      referencePhone: ''
+    }],
+    
+    // Step 7: Preferences & Availability
+    desiredRoles: '',
+    desiredIndustries: '',
+    workPreference: '',
+    availabilityToStart: '',
+    preferredTimeZones: [],
+    expectedSalary: '',
+    salaryFlexible: false,
+    willingToRelocate: '',
+    portfolioURL: '',
+    linkedinURL: '',
+    githubURL: '',
+    otherURL: '',
+    
+    // Step 8: Additional Information
+    whyJoinADN: '',
+    careerGoals: '',
+    additionalInfo: ''
+  });
+
+  const [submitStatus, setSubmitStatus] = useState('');
+
+  const handleChange = (field, value) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleFileUpload = (field, file) => {
+    setFormData(prev => ({ ...prev, [field]: file }));
+  };
+
+  const handleArrayChange = (arrayName, index, field, value) => {
+    const newArray = [...formData[arrayName]];
+    newArray[index][field] = value;
+    setFormData(prev => ({ ...prev, [arrayName]: newArray }));
+  };
+
+  const addArrayItem = (arrayName, defaultItem) => {
+    setFormData(prev => ({
+      ...prev,
+      [arrayName]: [...prev[arrayName], defaultItem]
+    }));
+  };
+
+  const removeArrayItem = (arrayName, index) => {
+    if (formData[arrayName].length > 1) {
+      setFormData(prev => ({
+        ...prev,
+        [arrayName]: prev[arrayName].filter((_, i) => i !== index)
+      }));
+    }
+  };
+
+  const handleCheckboxChange = (field, value) => {
+    setFormData(prev => {
+      const currentValues = prev[field] || [];
+      const newValues = currentValues.includes(value)
+        ? currentValues.filter(v => v !== value)
+        : [...currentValues, value];
+      return { ...prev, [field]: newValues };
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (currentStep < 8) {
+      setCurrentStep(currentStep + 1);
+      window.scrollTo(0, 0);
+    } else {
+      setSubmitStatus('sending');
+      
+      try {
+        const response = await fetch('https://formspree.io/f/xgowzdpb', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            formType: 'Talent Application',
+            ...formData
+          }),
+        });
+        
+        if (response.ok) {
+          setSubmitStatus('success');
+          setTimeout(() => {
+            alert('Thank you for applying! We will review your profile and contact you within 3-5 business days.');
+            navigate('/');
+          }, 1500);
+        } else {
+          setSubmitStatus('error');
+          alert('Failed to submit. Please try again or contact us directly.');
+        }
+      } catch (error) {
+        setSubmitStatus('error');
+        alert('Failed to submit. Please try again or contact us directly.');
+      }
+    }
+  };
+
+  const previousStep = () => {
+    setCurrentStep(currentStep - 1);
+    window.scrollTo(0, 0);
+  };
+
+  return (
+    <div className="bg-black text-white min-h-screen">
+      {/* Navigation */}
+      <nav className="fixed w-full bg-black/95 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
+              <h1 className="text-3xl font-bold">ADN</h1>
+              <span className="text-xs text-gray-400 ml-2">Global Solutions</span>
+            </div>
+            <button onClick={() => navigate('/')} className="text-yellow-600 hover:text-yellow-500 transition">
+              Back to Home
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <div className="pt-32 pb-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-black to-gray-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-6">
+            <Globe className="w-16 h-16 text-yellow-600 mx-auto mb-4" />
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Welcome to the New Frontier of<br />
+            <span className="text-yellow-600">Global Employment</span>
+          </h1>
+          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            ADN Global Solutions is the first professional talent agency focused on connecting talented professionals with employers from around the world. In our shrinking, interconnected world, distance is no longer a barrier to opportunity.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
+            <div className="bg-gray-800/50 p-4 rounded">
+              <Briefcase className="w-8 h-8 text-yellow-600 mx-auto mb-2" />
+              <p className="text-sm">Global Opportunities</p>
+            </div>
+            <div className="bg-gray-800/50 p-4 rounded">
+              <Award className="w-8 h-8 text-yellow-600 mx-auto mb-2" />
+              <p className="text-sm">Career Growth</p>
+            </div>
+            <div className="bg-gray-800/50 p-4 rounded">
+              <GraduationCap className="w-8 h-8 text-yellow-600 mx-auto mb-2" />
+              <p className="text-sm">Professional Development</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Form Section */}
+      <div className="pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4">Talent Application</h2>
+          <p className="text-gray-400 mb-12">Complete your profile to join our global talent network</p>
+
+          {/* Progress Bar */}
+          <div className="mb-12">
+            <div className="flex items-center justify-between">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((step) => (
+                <div key={step} className="flex items-center flex-1">
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${
+                    currentStep >= step ? 'bg-yellow-600 text-black' : 'bg-gray-700 text-gray-400'
+                  }`}>
+                    {step}
+                  </div>
+                  {step < 8 && (
+                    <div className={`flex-1 h-1 mx-1 ${
+                      currentStep > step ? 'bg-yellow-600' : 'bg-gray-700'
+                    }`} />
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="text-center text-sm text-gray-400 mt-2">
+              Step {currentStep} of 8
+            </div>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit}>
+            {/* Step 1: Personal Information */}
+            {currentStep === 1 && (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-yellow-600 mb-6">1. Personal Information</h2>
+                
+                <div>
+                  <label className="block text-sm font-medium mb-2">Full Name *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.fullName}
+                    onChange={(e) => handleChange('fullName', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                    placeholder="Full Name"
+                  />
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Age *</label>
+                    <input
+                      type="number"
+                      required
+                      min="18"
+                      max="100"
+                      value={formData.age}
+                      onChange={(e) => handleChange('age', e.target.value)}
+                      className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Country of Birth *</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.countryOfBirth}
+                      onChange={(e) => handleChange('countryOfBirth', e.target.value)}
+                      className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Email Address *</label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => handleChange('email', e.target.value)}
+                      className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Phone Number *</label>
+                    <input
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => handleChange('phone', e.target.value)}
+                      className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                      placeholder="+1 (555) 000-0000"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">WhatsApp Number</label>
+                  <input
+                    type="tel"
+                    value={formData.whatsapp}
+                    onChange={(e) => handleChange('whatsapp', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                    placeholder="+1 (555) 000-0000"
+                  />
+                </div>
+
+                <div className="border-t border-gray-700 pt-6">
+                  <h3 className="text-xl font-bold mb-4">Current Residence</h3>
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">House #/Apt # *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.houseApt}
+                        onChange={(e) => handleChange('houseApt', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Street Name or Number *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.streetName}
+                        onChange={(e) => handleChange('streetName', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-3 gap-6 mt-6">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">City *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.city}
+                        onChange={(e) => handleChange('city', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">State/Province</label>
+                      <input
+                        type="text"
+                        value={formData.state}
+                        onChange={(e) => handleChange('state', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Country *</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.country}
+                        onChange={(e) => handleChange('country', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t border-gray-700 pt-6">
+                  <h3 className="text-xl font-bold mb-4">Documentation</h3>
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Professional Photo *</label>
+                    <div className="border-2 border-dashed border-gray-700 rounded-lg p-6 text-center hover:border-yellow-600 transition cursor-pointer">
+                      <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                      <p className="text-sm text-gray-400 mb-2">Click to upload or drag and drop</p>
+                      <p className="text-xs text-gray-500">JPG, PNG (MAX. 5MB)</p>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => handleFileUpload('professionalPhoto', e.target.files[0])}
+                        className="hidden"
+                      />
+                    </div>
+                    {formData.professionalPhoto && (
+                      <p className="text-sm text-green-400 mt-2">✓ {formData.professionalPhoto.name}</p>
+                    )}
+                  </div>
+
+                  <div className="mt-6">
+                    <label className="block text-sm font-medium mb-2">Citizen Identification/Driver's License *</label>
+                    <div className="border-2 border-dashed border-gray-700 rounded-lg p-6 text-center hover:border-yellow-600 transition cursor-pointer">
+                      <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                      <p className="text-sm text-gray-400 mb-2">Upload ID or Driver's License</p>
+                      <p className="text-xs text-gray-500">PDF, JPG, PNG (MAX. 5MB)</p>
+                      <input
+                        type="file"
+                        accept="image/*,.pdf"
+                        onChange={(e) => handleFileUpload('identification', e.target.files[0])}
+                        className="hidden"
+                      />
+                    </div>
+                    {formData.identification && (
+                      <p className="text-sm text-green-400 mt-2">✓ {formData.identification.name}</p>
+                    )}
+                  </div>
+
+                  <div className="mt-6">
+                    <label className="block text-sm font-medium mb-2">Passport (if applicable)</label>
+                    <div className="border-2 border-dashed border-gray-700 rounded-lg p-6 text-center hover:border-yellow-600 transition cursor-pointer">
+                      <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                      <p className="text-sm text-gray-400 mb-2">Upload Passport</p>
+                      <p className="text-xs text-gray-500">PDF, JPG, PNG (MAX. 5MB)</p>
+                      <input
+                        type="file"
+                        accept="image/*,.pdf"
+                        onChange={(e) => handleFileUpload('passport', e.target.files[0])}
+                        className="hidden"
+                      />
+                    </div>
+                    {formData.passport && (
+                      <p className="text-sm text-green-400 mt-2">✓ {formData.passport.name}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step 2: Languages */}
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-yellow-600 mb-6">2. Languages</h2>
+                <p className="text-gray-400 mb-6">List all languages you speak and your proficiency level</p>
+
+                {formData.languages.map((lang, index) => (
+                  <div key={index} className="border border-gray-700 rounded-lg p-6 space-y-4">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xl font-bold">Language #{index + 1}</h3>
+                      {formData.languages.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeArrayItem('languages', index)}
+                          className="text-red-500 hover:text-red-400 text-sm flex items-center"
+                        >
+                          <X size={16} className="mr-1" /> Remove
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Language *</label>
+                        <input
+                          type="text"
+                          required
+                          value={lang.language}
+                          onChange={(e) => handleArrayChange('languages', index, 'language', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                          placeholder="e.g., English, Spanish, Mandarin"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Proficiency Level *</label>
+                        <select
+                          required
+                          value={lang.proficiency}
+                          onChange={(e) => handleArrayChange('languages', index, 'proficiency', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        >
+                          <option value="">Select</option>
+                          <option value="native">Native/Bilingual</option>
+                          <option value="fluent">Fluent (C2)</option>
+                          <option value="advanced">Advanced (C1)</option>
+                          <option value="intermediate">Intermediate (B1-B2)</option>
+                          <option value="basic">Basic (A1-A2)</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                <button
+                  type="button"
+                  onClick={() => addArrayItem('languages', { language: '', proficiency: '' })}
+                  className="w-full border-2 border-dashed border-gray-700 rounded-lg py-4 text-gray-400 hover:border-yellow-600 hover:text-yellow-600 transition flex items-center justify-center"
+                >
+                  <Plus size={20} className="mr-2" /> Add Another Language
+                </button>
+              </div>
+            )}
+
+            {/* Step 3: Education */}
+            {currentStep === 3 && (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-yellow-600 mb-6">3. Education</h2>
+
+                {formData.education.map((edu, index) => (
+                  <div key={index} className="border border-gray-700 rounded-lg p-6 space-y-4">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xl font-bold">Education #{index + 1}</h3>
+                      {formData.education.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeArrayItem('education', index)}
+                          className="text-red-500 hover:text-red-400 text-sm flex items-center"
+                        >
+                          <X size={16} className="mr-1" /> Remove
+                        </button>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">School/University Name *</label>
+                      <input
+                        type="text"
+                        required
+                        value={edu.schoolName}
+                        onChange={(e) => handleArrayChange('education', index, 'schoolName', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        placeholder="Institution name"
+                      />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Level of Education *</label>
+                        <select
+                          required
+                          value={edu.levelOfEducation}
+                          onChange={(e) => handleArrayChange('education', index, 'levelOfEducation', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        >
+                          <option value="">Select</option>
+                          <option value="high-school">High School</option>
+                          <option value="associate">Associate Degree</option>
+                          <option value="bachelor">Bachelor's Degree</option>
+                          <option value="master">Master's Degree</option>
+                          <option value="doctorate">Doctorate/PhD</option>
+                          <option value="vocational">Vocational/Technical Certificate</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Graduation Year</label>
+                        <input
+                          type="number"
+                          min="1950"
+                          max="2030"
+                          value={edu.graduationYear}
+                          onChange={(e) => handleArrayChange('education', index, 'graduationYear', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                          placeholder="e.g., 2020"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Degree/Diploma</label>
+                        <input
+                          type="text"
+                          value={edu.degree}
+                          onChange={(e) => handleArrayChange('education', index, 'degree', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                          placeholder="e.g., Bachelor of Science"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Field of Study</label>
+                        <input
+                          type="text"
+                          value={edu.fieldOfStudy}
+                          onChange={(e) => handleArrayChange('education', index, 'fieldOfStudy', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                          placeholder="e.g., Computer Science, Business"
+                        />
+                      </div>
+                    </div>
+
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={edu.stillEnrolled}
+                        onChange={(e) => handleArrayChange('education', index, 'stillEnrolled', e.target.checked)}
+                        className="mr-2"
+                      />
+                      <span className="text-sm">Currently enrolled</span>
+                    </label>
+                  </div>
+                ))}
+
+                <button
+                  type="button"
+                  onClick={() => addArrayItem('education', {
+                    schoolName: '',
+                    levelOfEducation: '',
+                    degree: '',
+                    fieldOfStudy: '',
+                    graduationYear: '',
+                    stillEnrolled: false
+                  })}
+                  className="w-full border-2 border-dashed border-gray-700 rounded-lg py-4 text-gray-400 hover:border-yellow-600 hover:text-yellow-600 transition flex items-center justify-center"
+                >
+                  <Plus size={20} className="mr-2" /> Add Another Education
+                </button>
+              </div>
+            )}
+
+            {/* Step 4: Certifications */}
+            {currentStep === 4 && (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-yellow-600 mb-6">4. Certifications</h2>
+                <p className="text-gray-400 mb-6">Professional certifications, licenses, or credentials</p>
+
+                {formData.certifications.map((cert, index) => (
+                  <div key={index} className="border border-gray-700 rounded-lg p-6 space-y-4">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xl font-bold">Certification #{index + 1}</h3>
+                      {formData.certifications.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeArrayItem('certifications', index)}
+                          className="text-red-500 hover:text-red-400 text-sm flex items-center"
+                        >
+                          <X size={16} className="mr-1" /> Remove
+                        </button>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Certification Name</label>
+                      <input
+                        type="text"
+                        value={cert.certificationName}
+                        onChange={(e) => handleArrayChange('certifications', index, 'certificationName', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        placeholder="e.g., AWS Certified Solutions Architect"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Issuing Organization</label>
+                      <input
+                        type="text"
+                        value={cert.issuingOrganization}
+                        onChange={(e) => handleArrayChange('certifications', index, 'issuingOrganization', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        placeholder="e.g., Amazon Web Services"
+                      />
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Issue Date</label>
+                        <input
+                          type="month"
+                          value={cert.issueDate}
+                          onChange={(e) => handleArrayChange('certifications', index, 'issueDate', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Expiration Date (if applicable)</label>
+                        <input
+                          type="month"
+                          value={cert.expirationDate}
+                          onChange={(e) => handleArrayChange('certifications', index, 'expirationDate', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Credential ID/URL</label>
+                      <input
+                        type="text"
+                        value={cert.credentialID}
+                        onChange={(e) => handleArrayChange('certifications', index, 'credentialID', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        placeholder="Credential ID or verification URL"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Upload Certificate</label>
+                      <div className="border-2 border-dashed border-gray-700 rounded-lg p-4 text-center hover:border-yellow-600 transition cursor-pointer">
+                        <Upload className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+                        <p className="text-xs text-gray-400">Upload certificate (PDF, JPG, PNG)</p>
+                        <input
+                          type="file"
+                          accept="image/*,.pdf"
+                          onChange={(e) => handleArrayChange('certifications', index, 'certificateFile', e.target.files[0])}
+                          className="hidden"
+                        />
+                      </div>
+                      {cert.certificateFile && (
+                        <p className="text-sm text-green-400 mt-2">✓ {cert.certificateFile.name}</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+                <button
+                  type="button"
+                  onClick={() => addArrayItem('certifications', {
+                    certificationName: '',
+                    issuingOrganization: '',
+                    issueDate: '',
+                    expirationDate: '',
+                    credentialID: '',
+                    certificateFile: null
+                  })}
+                  className="w-full border-2 border-dashed border-gray-700 rounded-lg py-4 text-gray-400 hover:border-yellow-600 hover:text-yellow-600 transition flex items-center justify-center"
+                >
+                  <Plus size={20} className="mr-2" /> Add Another Certification
+                </button>
+              </div>
+            )}
+
+            {/* Step 5: Professional Experience Overview */}
+            {currentStep === 5 && (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-yellow-600 mb-6">5. Professional Experience Overview</h2>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Are you currently employed? *</label>
+                  <select
+                    required
+                    value={formData.currentlyEmployed}
+                    onChange={(e) => handleChange('currentlyEmployed', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  >
+                    <option value="">Select</option>
+                    <option value="yes">Yes - Full time</option>
+                    <option value="yes-part">Yes - Part time</option>
+                    <option value="no">No - Actively looking</option>
+                    <option value="no-passive">No - Open to opportunities</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Total Years of Professional Experience *</label>
+                  <select
+                    required
+                    value={formData.totalYearsExperience}
+                    onChange={(e) => handleChange('totalYearsExperience', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  >
+                    <option value="">Select</option>
+                    <option value="0-1">Less than 1 year</option>
+                    <option value="1-3">1-3 years</option>
+                    <option value="3-5">3-5 years</option>
+                    <option value="5-7">5-7 years</option>
+                    <option value="7-10">7-10 years</option>
+                    <option value="10+">10+ years</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Primary Industry *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.primaryIndustry}
+                    onChange={(e) => handleChange('primaryIndustry', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                    placeholder="e.g., Technology, Healthcare, Finance, Marketing"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Primary Role/Function *</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.primaryRole}
+                    onChange={(e) => handleChange('primaryRole', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                    placeholder="e.g., Software Engineer, Project Manager, Sales"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Key Skills (comma separated) *</label>
+                  <textarea
+                    required
+                    value={formData.keySkills}
+                    onChange={(e) => handleChange('keySkills', e.target.value)}
+                    rows="3"
+                    placeholder="e.g., Project Management, Data Analysis, Customer Relations, Strategic Planning"
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Technical Skills *</label>
+                  <textarea
+                    required
+                    value={formData.technicalSkills}
+                    onChange={(e) => handleChange('technicalSkills', e.target.value)}
+                    rows="3"
+                    placeholder="e.g., Python, React, AWS, SQL, Photoshop, Excel, CAD"
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Soft Skills *</label>
+                  <textarea
+                    required
+                    value={formData.softSkills}
+                    onChange={(e) => handleChange('softSkills', e.target.value)}
+                    rows="3"
+                    placeholder="e.g., Leadership, Communication, Problem-solving, Adaptability, Team Collaboration"
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Tools & Software Proficiency</label>
+                  <textarea
+                    value={formData.toolsAndSoftware}
+                    onChange={(e) => handleChange('toolsAndSoftware', e.target.value)}
+                    rows="3"
+                    placeholder="e.g., Salesforce, Jira, Adobe Creative Suite, Microsoft Office, Slack"
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Step 6: Work History */}
+            {currentStep === 6 && (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-yellow-600 mb-6">6. Work History</h2>
+                <p className="text-gray-400 mb-6">List your previous work experience (most recent first)</p>
+
+                {formData.workHistory.map((work, index) => (
+                  <div key={index} className="border border-gray-700 rounded-lg p-6 space-y-4">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-xl font-bold">Position #{index + 1}</h3>
+                      {formData.workHistory.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeArrayItem('workHistory', index)}
+                          className="text-red-500 hover:text-red-400 text-sm flex items-center"
+                        >
+                          <X size={16} className="mr-1" /> Remove
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Company Name *</label>
+                        <input
+                          type="text"
+                          required
+                          value={work.companyName}
+                          onChange={(e) => handleArrayChange('workHistory', index, 'companyName', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Job Title *</label>
+                        <input
+                          type="text"
+                          required
+                          value={work.jobTitle}
+                          onChange={(e) => handleArrayChange('workHistory', index, 'jobTitle', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Employment Type *</label>
+                        <select
+                          required
+                          value={work.employmentType}
+                          onChange={(e) => handleArrayChange('workHistory', index, 'employmentType', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        >
+                          <option value="">Select</option>
+                          <option value="full-time">Full-time</option>
+                          <option value="part-time">Part-time</option>
+                          <option value="contract">Contract</option>
+                          <option value="freelance">Freelance</option>
+                          <option value="internship">Internship</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Location</label>
+                        <input
+                          type="text"
+                          value={work.location}
+                          onChange={(e) => handleArrayChange('workHistory', index, 'location', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                          placeholder="City, Country or 'Remote'"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Start Date *</label>
+                        <input
+                          type="month"
+                          required
+                          value={work.startDate}
+                          onChange={(e) => handleArrayChange('workHistory', index, 'startDate', e.target.value)}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-2">End Date</label>
+                        <input
+                          type="month"
+                          value={work.endDate}
+                          onChange={(e) => handleArrayChange('workHistory', index, 'endDate', e.target.value)}
+                          disabled={work.currentlyWorking}
+                          className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none disabled:opacity-50"
+                        />
+                      </div>
+                    </div>
+
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        checked={work.currentlyWorking}
+                        onChange={(e) => handleArrayChange('workHistory', index, 'currentlyWorking', e.target.checked)}
+                        className="mr-2"
+                      />
+                      <span className="text-sm">I currently work here</span>
+                    </label>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Key Responsibilities *</label>
+                      <textarea
+                        required
+                        value={work.responsibilities}
+                        onChange={(e) => handleArrayChange('workHistory', index, 'responsibilities', e.target.value)}
+                        rows="4"
+                        placeholder="Describe your main duties and responsibilities..."
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Key Achievements</label>
+                      <textarea
+                        value={work.achievements}
+                        onChange={(e) => handleArrayChange('workHistory', index, 'achievements', e.target.value)}
+                        rows="3"
+                        placeholder="Quantifiable accomplishments, projects completed, awards, etc..."
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="border-t border-gray-700 pt-4 mt-4">
+                      <h4 className="font-bold mb-3">Reference (Optional)</h4>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Reference Name</label>
+                          <input
+                            type="text"
+                            value={work.referenceName}
+                            onChange={(e) => handleArrayChange('workHistory', index, 'referenceName', e.target.value)}
+                            className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Reference Title</label>
+                          <input
+                            type="text"
+                            value={work.referenceTitle}
+                            onChange={(e) => handleArrayChange('workHistory', index, 'referenceTitle', e.target.value)}
+                            className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                            placeholder="e.g., Manager, Supervisor"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4 mt-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Reference Email</label>
+                          <input
+                            type="email"
+                            value={work.referenceEmail}
+                            onChange={(e) => handleArrayChange('workHistory', index, 'referenceEmail', e.target.value)}
+                            className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Reference Phone</label>
+                          <input
+                            type="tel"
+                            value={work.referencePhone}
+                            onChange={(e) => handleArrayChange('workHistory', index, 'referencePhone', e.target.value)}
+                            className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                <button
+                  type="button"
+                  onClick={() => addArrayItem('workHistory', {
+                    companyName: '',
+                    jobTitle: '',
+                    employmentType: '',
+                    location: '',
+                    startDate: '',
+                    endDate: '',
+                    currentlyWorking: false,
+                    responsibilities: '',
+                    achievements: '',
+                    referenceName: '',
+                    referenceTitle: '',
+                    referenceEmail: '',
+                    referencePhone: ''
+                  })}
+                  className="w-full border-2 border-dashed border-gray-700 rounded-lg py-4 text-gray-400 hover:border-yellow-600 hover:text-yellow-600 transition flex items-center justify-center"
+                >
+                  <Plus size={20} className="mr-2" /> Add Another Position
+                </button>
+              </div>
+            )}
+
+            {/* Step 7: Job Preferences & Availability */}
+            {currentStep === 7 && (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-yellow-600 mb-6">7. Job Preferences & Availability</h2>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Desired Roles/Positions *</label>
+                  <textarea
+                    required
+                    value={formData.desiredRoles}
+                    onChange={(e) => handleChange('desiredRoles', e.target.value)}
+                    rows="3"
+                    placeholder="What types of positions are you interested in?"
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Desired Industries</label>
+                  <textarea
+                    value={formData.desiredIndustries}
+                    onChange={(e) => handleChange('desiredIndustries', e.target.value)}
+                    rows="2"
+                    placeholder="Which industries interest you most?"
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Work Preference *</label>
+                  <select
+                    required
+                    value={formData.workPreference}
+                    onChange={(e) => handleChange('workPreference', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  >
+                    <option value="">Select</option>
+                    <option value="remote-only">Remote only</option>
+                    <option value="hybrid">Hybrid (remote + office)</option>
+                    <option value="on-site">On-site only</option>
+                    <option value="flexible">Flexible/Open to any</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Availability to Start *</label>
+                  <select
+                    required
+                    value={formData.availabilityToStart}
+                    onChange={(e) => handleChange('availabilityToStart', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  >
+                    <option value="">Select</option>
+                    <option value="immediate">Immediate (within 1 week)</option>
+                    <option value="2-weeks">2 weeks notice</option>
+                    <option value="1-month">1 month notice</option>
+                    <option value="2-months">2+ months notice</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Preferred Time Zones (select all that apply)</label>
+                  <div className="space-y-2">
+                    {['EST (US Eastern)', 'CST (US Central)', 'MST (US Mountain)', 'PST (US Pacific)', 'GMT (London)', 'CET (Central Europe)', 'IST (India)', 'AEST (Australia)', 'Flexible/Any'].map((tz) => (
+                      <label key={tz} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={formData.preferredTimeZones.includes(tz)}
+                          onChange={() => handleCheckboxChange('preferredTimeZones', tz)}
+                          className="mr-2"
+                        />
+                        <span className="text-sm">{tz}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Expected Salary (Annual USD) *</label>
+                  <input
+                    type="number"
+                    required
+                    value={formData.expectedSalary}
+                    onChange={(e) => handleChange('expectedSalary', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                    placeholder="e.g., 60000"
+                  />
+                  <label className="flex items-center mt-2">
+                    <input
+                      type="checkbox"
+                      checked={formData.salaryFlexible}
+                      onChange={(e) => handleChange('salaryFlexible', e.target.checked)}
+                      className="mr-2"
+                    />
+                    <span className="text-sm text-gray-400">Negotiable/Flexible</span>
+                  </label>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Willing to Relocate? *</label>
+                  <select
+                    required
+                    value={formData.willingToRelocate}
+                    onChange={(e) => handleChange('willingToRelocate', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  >
+                    <option value="">Select</option>
+                    <option value="yes">Yes - anywhere</option>
+                    <option value="yes-specific">Yes - specific countries/regions</option>
+                    <option value="no">No - remote only</option>
+                  </select>
+                </div>
+
+                <div className="border-t border-gray-700 pt-6">
+                  <h3 className="text-xl font-bold mb-4">Online Presence</h3>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Portfolio/Website URL</label>
+                      <input
+                        type="url"
+                        value={formData.portfolioURL}
+                        onChange={(e) => handleChange('portfolioURL', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        placeholder="https://"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">LinkedIn Profile</label>
+                      <input
+                        type="url"
+                        value={formData.linkedinURL}
+                        onChange={(e) => handleChange('linkedinURL', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        placeholder="https://linkedin.com/in/yourprofile"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">GitHub Profile (if applicable)</label>
+                      <input
+                        type="url"
+                        value={formData.githubURL}
+                        onChange={(e) => handleChange('githubURL', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        placeholder="https://github.com/yourprofile"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Other Relevant Links</label>
+                      <input
+                        type="url"
+                        value={formData.otherURL}
+                        onChange={(e) => handleChange('otherURL', e.target.value)}
+                        className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                        placeholder="Behance, Dribbble, Medium, etc."
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Step 8: Additional Information */}
+            {currentStep === 8 && (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-yellow-600 mb-6">8. Final Questions</h2>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Why do you want to join ADN Global Solutions' talent network? *</label>
+                  <textarea
+                    required
+                    value={formData.whyJoinADN}
+                    onChange={(e) => handleChange('whyJoinADN', e.target.value)}
+                    rows="4"
+                    placeholder="Tell us about your motivations and what you're looking for..."
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">What are your career goals for the next 3-5 years? *</label>
+                  <textarea
+                    required
+                    value={formData.careerGoals}
+                    onChange={(e) => handleChange('careerGoals', e.target.value)}
+                    rows="4"
+                    placeholder="Describe your professional aspirations..."
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Additional Information</label>
+                  <textarea
+                    value={formData.additionalInfo}
+                    onChange={(e) => handleChange('additionalInfo', e.target.value)}
+                    rows="4"
+                    placeholder="Anything else you'd like us to know? Special circumstances, unique skills, etc..."
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  />
+                </div>
+
+                <div className="border border-gray-700 rounded-lg p-6 bg-gray-900/50">
+                  <h3 className="text-lg font-bold mb-3 flex items-center">
+                    <CheckCircle className="w-5 h-5 mr-2 text-yellow-600" />
+                    Review Your Application
+                  </h3>
+                  <div className="space-y-2 text-sm text-gray-400">
+                    <p><span className="text-white">Name:</span> {formData.fullName || 'Not provided'}</p>
+                    <p><span className="text-white">Email:</span> {formData.email || 'Not provided'}</p>
+                    <p><span className="text-white">Phone:</span> {formData.phone || 'Not provided'}</p>
+                    <p><span className="text-white">Location:</span> {formData.city && formData.country ? `${formData.city}, ${formData.country}` : 'Not provided'}</p>
+                    <p><span className="text-white">Experience:</span> {formData.totalYearsExperience || 'Not specified'}</p>
+                    <p><span className="text-white">Primary Role:</span> {formData.primaryRole || 'Not specified'}</p>
+                    <p><span className="text-white">Languages:</span> {formData.languages.filter(l => l.language).length}</p>
+                    <p><span className="text-white">Education entries:</span> {formData.education.length}</p>
+                    <p><span className="text-white">Work history entries:</span> {formData.workHistory.length}</p>
+                  </div>
+                </div>
+
+                <div className="bg-yellow-600/10 border border-yellow-600/30 rounded-lg p-4">
+                  <p className="text-sm text-yellow-600">
+                    By submitting this application, you consent to ADN Global Solutions storing and processing your personal information for recruitment purposes. We will contact you within 3-5 business days to discuss potential opportunities.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-between mt-12">
+              {currentStep > 1 && (
+                <button
+                  type="button"
+                  onClick={previousStep}
+                  className="flex items-center px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition"
+                >
+                  <ChevronLeft className="w-5 h-5 mr-2" />
+                  Previous
+                </button>
+              )}
+
+              <button
+                type="submit"
+                className={`flex items-center px-8 py-3 bg-yellow-600 hover:bg-yellow-500 text-black font-bold rounded-lg transition ${
+                  currentStep === 1 ? 'ml-auto' : ''
+                }`}
+              >
+                {currentStep === 8 ? (
+                  submitStatus === 'success' ? (
+                    <>
+                      <CheckCircle className="w-5 h-5 mr-2" />
+                      Submitted!
+                    </>
+                  ) : (
+                    'Submit Application'
+                  )
+                ) : (
+                  <>
+                    Next Step
+                    <ChevronRight className="w-5 h-5 ml-2" />
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
