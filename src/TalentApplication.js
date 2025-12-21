@@ -286,7 +286,7 @@ export default function TalentApplication() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Country of Birth *</label>
+                    <label className="block text-sm font-medium mb-2">Country of Residence *</label>
                     <input
                       type="text"
                       required
