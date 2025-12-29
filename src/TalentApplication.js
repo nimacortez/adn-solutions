@@ -1,10 +1,35 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight, ChevronLeft, Upload, Plus, X, CheckCircle, Globe, Briefcase, Award, GraduationCap } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Plus, X, CheckCircle, Globe, Briefcase, Award, GraduationCap } from 'lucide-react';
 
 export default function TalentApplication() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
+  
+  // List of all countries
+  const countries = [
+    "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
+    "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+    "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia",
+    "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica",
+    "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt",
+    "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon",
+    "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana",
+    "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel",
+    "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan",
+    "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar",
+    "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia",
+    "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal",
+    "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan",
+    "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar",
+    "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia",
+    "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa",
+    "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan",
+    "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan",
+    "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City",
+    "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+  ];
+  
   const [formData, setFormData] = useState({
     // Step 1: Personal Information
     fullName: '',
@@ -18,9 +43,6 @@ export default function TalentApplication() {
     city: '',
     state: '',
     country: '',
-    professionalPhoto: null,
-    identification: null,
-    passport: null,
     
     // Step 2: Languages
     languages: [{ language: '', proficiency: '' }],
@@ -41,8 +63,7 @@ export default function TalentApplication() {
       issuingOrganization: '',
       issueDate: '',
       expirationDate: '',
-      credentialID: '',
-      certificateFile: null
+      credentialID: ''
     }],
     
     // Step 5: Professional Experience
@@ -77,10 +98,6 @@ export default function TalentApplication() {
     desiredIndustries: '',
     workPreference: '',
     availabilityToStart: '',
-    preferredTimeZones: [],
-    expectedSalary: '',
-    salaryFlexible: false,
-    willingToRelocate: '',
     portfolioURL: '',
     linkedinURL: '',
     githubURL: '',
@@ -96,10 +113,6 @@ export default function TalentApplication() {
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleFileUpload = (field, file) => {
-    setFormData(prev => ({ ...prev, [field]: file }));
   };
 
   const handleArrayChange = (arrayName, index, field, value) => {
@@ -122,16 +135,6 @@ export default function TalentApplication() {
         [arrayName]: prev[arrayName].filter((_, i) => i !== index)
       }));
     }
-  };
-
-  const handleCheckboxChange = (field, value) => {
-    setFormData(prev => {
-      const currentValues = prev[field] || [];
-      const newValues = currentValues.includes(value)
-        ? currentValues.filter(v => v !== value)
-        : [...currentValues, value];
-      return { ...prev, [field]: newValues };
-    });
   };
 
   const handleSubmit = async (e) => {
@@ -162,11 +165,11 @@ export default function TalentApplication() {
           }, 1500);
         } else {
           setSubmitStatus('error');
-          alert('Failed to submit. Please try again or contact us directly.');
+          alert('Failed to submit. Please try again or contact us directly at Info@adnglobalsolutions.com');
         }
       } catch (error) {
         setSubmitStatus('error');
-        alert('Failed to submit. Please try again or contact us directly.');
+        alert('Failed to submit. Please try again or contact us directly at Info@adnglobalsolutions.com');
       }
     }
   };
@@ -182,13 +185,13 @@ export default function TalentApplication() {
       <nav className="fixed w-full bg-black/95 backdrop-blur-sm z-50 border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
-          <img src="/main_logo.jpeg" alt="ADN Logo" className="h-12 w-12 rounded" />
-          <div>
-            <h1 className="text-3xl font-bold">ADN</h1>
-            <span className="text-xs text-gray-400">Global Solutions</span>
-          </div>
-        </div>
+            <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
+              <img src="/main_logo.jpeg" alt="ADN Logo" className="h-12 w-12 rounded" />
+              <div>
+                <h1 className="text-3xl font-bold">ADN</h1>
+                <span className="text-xs text-gray-400">Global Solutions</span>
+              </div>
+            </div>
             <button onClick={() => navigate('/')} className="text-yellow-600 hover:text-yellow-500 transition">
               Back to Home
             </button>
@@ -289,14 +292,18 @@ export default function TalentApplication() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Country of Residence *</label>
-                    <input
-                      type="text"
+                    <label className="block text-sm font-medium mb-2">Country of Birth *</label>
+                    <select
                       required
                       value={formData.countryOfBirth}
                       onChange={(e) => handleChange('countryOfBirth', e.target.value)}
                       className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
-                    />
+                    >
+                      <option value="">Select Country</option>
+                      {countries.map((country) => (
+                        <option key={country} value={country}>{country}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -387,15 +394,25 @@ export default function TalentApplication() {
 
                     <div>
                       <label className="block text-sm font-medium mb-2">Country *</label>
-                      <input
-                        type="text"
+                      <select
                         required
                         value={formData.country}
                         onChange={(e) => handleChange('country', e.target.value)}
                         className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
-                      />
+                      >
+                        <option value="">Select Country</option>
+                        {countries.map((country) => (
+                          <option key={country} value={country}>{country}</option>
+                        ))}
+                      </select>
                     </div>
                   </div>
+                </div>
+
+                <div className="bg-blue-600/10 border border-blue-600/30 rounded-lg p-4 mt-6">
+                  <p className="text-sm text-blue-400">
+                    <strong>Note:</strong> After submitting this application, we may request additional documents (ID, certifications, portfolio) via email if your profile is a good match.
+                  </p>
                 </div>
               </div>
             )}
@@ -506,6 +523,7 @@ export default function TalentApplication() {
                           className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
                         >
                           <option value="">Select</option>
+                          <option value="none">None</option>
                           <option value="high-school">High School</option>
                           <option value="associate">Associate Degree</option>
                           <option value="bachelor">Bachelor's Degree</option>
@@ -587,7 +605,7 @@ export default function TalentApplication() {
             {currentStep === 4 && (
               <div className="space-y-6">
                 <h2 className="text-3xl font-bold text-yellow-600 mb-6">4. Certifications</h2>
-                <p className="text-gray-400 mb-6">Professional certifications, licenses, or credentials</p>
+                <p className="text-gray-400 mb-6">Professional certifications, licenses, or credentials (optional)</p>
 
                 {formData.certifications.map((cert, index) => (
                   <div key={index} className="border border-gray-700 rounded-lg p-6 space-y-4">
@@ -658,7 +676,6 @@ export default function TalentApplication() {
                         placeholder="Credential ID or verification URL"
                       />
                     </div>
-
                   </div>
                 ))}
 
@@ -669,8 +686,7 @@ export default function TalentApplication() {
                     issuingOrganization: '',
                     issueDate: '',
                     expirationDate: '',
-                    credentialID: '',
-                    certificateFile: null
+                    credentialID: ''
                   })}
                   className="w-full border-2 border-dashed border-gray-700 rounded-lg py-4 text-gray-400 hover:border-yellow-600 hover:text-yellow-600 transition flex items-center justify-center"
                 >
@@ -1054,59 +1070,6 @@ export default function TalentApplication() {
                     <option value="2-weeks">2 weeks notice</option>
                     <option value="1-month">1 month notice</option>
                     <option value="2-months">2+ months notice</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">Preferred Time Zones (select all that apply)</label>
-                  <div className="space-y-2">
-                    {['EST (US Eastern)', 'CST (US Central)', 'MST (US Mountain)', 'PST (US Pacific)', 'GMT (London)', 'CET (Central Europe)', 'IST (India)', 'AEST (Australia)', 'Flexible/Any'].map((tz) => (
-                      <label key={tz} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={formData.preferredTimeZones.includes(tz)}
-                          onChange={() => handleCheckboxChange('preferredTimeZones', tz)}
-                          className="mr-2"
-                        />
-                        <span className="text-sm">{tz}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">Expected Salary (Annual USD) *</label>
-                  <input
-                    type="number"
-                    required
-                    value={formData.expectedSalary}
-                    onChange={(e) => handleChange('expectedSalary', e.target.value)}
-                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
-                    placeholder="e.g., 60000"
-                  />
-                  <label className="flex items-center mt-2">
-                    <input
-                      type="checkbox"
-                      checked={formData.salaryFlexible}
-                      onChange={(e) => handleChange('salaryFlexible', e.target.checked)}
-                      className="mr-2"
-                    />
-                    <span className="text-sm text-gray-400">Negotiable/Flexible</span>
-                  </label>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">Willing to Relocate? *</label>
-                  <select
-                    required
-                    value={formData.willingToRelocate}
-                    onChange={(e) => handleChange('willingToRelocate', e.target.value)}
-                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
-                  >
-                    <option value="">Select</option>
-                    <option value="yes">Yes - anywhere</option>
-                    <option value="yes-specific">Yes - specific countries/regions</option>
-                    <option value="no">No - remote only</option>
                   </select>
                 </div>
 
