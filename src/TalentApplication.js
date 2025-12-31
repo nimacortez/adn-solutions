@@ -160,7 +160,6 @@ export default function TalentApplication() {
         if (response.ok) {
           setSubmitStatus('success');
           setTimeout(() => {
-            alert('Thank you for applying! We will review your profile and contact you within 3-5 business days.');
             navigate('/');
           }, 1500);
         } else {
