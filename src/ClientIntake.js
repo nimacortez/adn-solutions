@@ -147,7 +147,7 @@ export default function ClientIntake() {
         if (response.ok) {
           setSubmitStatus('success');
           setTimeout(() => {
-            window.location.href = 'https://go.adnglobalsolutions.com/thank-you-page';
+            window.location.href = 'https://go.adnglobalsolutions.com/next-steps';
           }, 1500);
         } else {
           setSubmitStatus('error');
