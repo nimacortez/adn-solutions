@@ -36,11 +36,11 @@ export default function About() {
             </p>
 
             <div className="bg-gradient-to-br from-yellow-900/20 to-transparent p-8 rounded border border-yellow-600/30 my-8">
-              <h3 className="text-2xl font-bold text-yellow-500 mb-4">⭐ Our Vision</h3>
+              <h3 className="text-2xl font-bold text-yellow-500 mb-4">Our Vision</h3>
               <p>To redefine modern workforce solutions by enabling companies to build global teams powered by professional excellence, seamless collaboration, and strategic cost efficiency.</p>
             </div>
 
-            <h3 className="text-2xl font-bold text-white mt-12 mb-4">⭐ What We Do</h3>
+            <h3 className="text-2xl font-bold text-white mt-12 mb-4">What We Do</h3>
             <div className="space-y-4">
               <div>
                 <h4 className="font-bold text-yellow-500 mb-2">✔ Remote Staffing & Talent Placement</h4>
@@ -60,7 +60,7 @@ export default function About() {
               </div>
             </div>
 
-            <h3 className="text-2xl font-bold text-white mt-12 mb-4">⭐ Why Businesses Choose ADN</h3>
+            <h3 className="text-2xl font-bold text-white mt-12 mb-4">Why Businesses Choose ADN</h3>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Professional, Vetted Talent</li>
               <li>Reliable Cost Efficiency</li>
@@ -69,7 +69,7 @@ export default function About() {
             </ul>
 
             <div className="bg-gradient-to-br from-yellow-900/20 to-transparent p-8 rounded border border-yellow-600/30 my-8">
-              <h3 className="text-2xl font-bold text-yellow-500 mb-4">⭐ Our Mission</h3>
+              <h3 className="text-2xl font-bold text-yellow-500 mb-4">Our Mission</h3>
               <p>To empower businesses with access to exceptional global talent while creating meaningful, sustainable career opportunities worldwide.</p>
             </div>
 

@@ -377,7 +377,7 @@ function HomePage() {
             <div className="text-center p-6">
               <Shield className="text-yellow-600 mx-auto mb-4" size={48} />
               <h4 className="font-bold mb-2">U.S.-Registered LLC</h4>
-              <p className="text-sm text-gray-400">Wyoming-based for legitimacy</p>
+              <p className="text-sm text-gray-400">Based in the United States.</p>
             </div>
 
             <div className="text-center p-6">
