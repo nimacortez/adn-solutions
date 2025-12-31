@@ -147,8 +147,7 @@ export default function ClientIntake() {
         if (response.ok) {
           setSubmitStatus('success');
           setTimeout(() => {
-            alert('Thank you! Your client intake form has been submitted. We will contact you within 24 hours.');
-            navigate('/')
+            window.location.href = 'https://go.adnglobalsolutions.com/thank-you-page';
           }, 1500);
         } else {
           setSubmitStatus('error');

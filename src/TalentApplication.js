@@ -160,6 +160,7 @@ export default function TalentApplication() {
         if (response.ok) {
           setSubmitStatus('success');
           setTimeout(() => {
+            alert('Thank you for applying! We will review your profile and contact you within 3-5 business days.');
             navigate('/');
           }, 1500);
         } else {
@@ -1038,6 +1039,22 @@ export default function TalentApplication() {
                     placeholder="Which industries interest you most?"
                     className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Work Preference *</label>
+                  <select
+                    required
+                    value={formData.workPreference}
+                    onChange={(e) => handleChange('workPreference', e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded px-4 py-3 focus:border-yellow-600 focus:outline-none"
+                  >
+                    <option value="">Select</option>
+                    <option value="remote-only">Remote only</option>
+                    <option value="hybrid">Hybrid (remote + office)</option>
+                    <option value="on-site">On-site only</option>
+                    <option value="flexible">Flexible/Open to any</option>
+                  </select>
                 </div>
 
                 <div>
