@@ -189,7 +189,7 @@ function HomePage() {
               <DollarSign className="text-yellow-600 mb-4" size={48} />
               <h4 className="text-xl font-bold mb-3">Cost‑Optimized Remote Talent</h4>
               <p className="text-gray-400 text-sm">
-                Cut hiring costs by 40–70% compared to U.S. hires. Get access to global talent without compromising on quality — ideal for scaling without inflating payroll.
+                Cut hiring costs compared to U.S. hires. Get access to global talent without compromising on quality — ideal for scaling without inflating payroll.
               </p>
             </div>
 
@@ -245,7 +245,7 @@ function HomePage() {
               <div className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/20 p-6 rounded border border-yellow-600">
                 <h4 className="text-lg font-bold mb-4 text-yellow-400">ADN Global Solutions</h4>
                 <ul className="space-y-2 text-gray-200 text-sm">
-                  <li className="flex items-start"><CheckCircle size={16} className="text-green-400 mr-2 mt-1 flex-shrink-0" /> Save 40–70% on labor costs</li>
+                  <li className="flex items-start"><CheckCircle size={16} className="text-green-400 mr-2 mt-1 flex-shrink-0" /> Save on labor costs</li>
                   <li className="flex items-start"><CheckCircle size={16} className="text-green-400 mr-2 mt-1 flex-shrink-0" /> Hire remote talent globally; scale fast</li>
                   <li className="flex items-start"><CheckCircle size={16} className="text-green-400 mr-2 mt-1 flex-shrink-0" /> All-in-one staffing + HR + payroll + compliance</li>
                   <li className="flex items-start"><CheckCircle size={16} className="text-green-400 mr-2 mt-1 flex-shrink-0" /> Global talent pool: admin → tech → AI</li>
@@ -349,7 +349,7 @@ function HomePage() {
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="bg-gradient-to-br from-yellow-900/20 to-transparent p-6 rounded border border-yellow-600/30">
               <div className="text-4xl mb-3">💡</div>
-              <h4 className="font-bold text-xl mb-2">40–70% Cost Reduction</h4>
+              <h4 className="font-bold text-xl mb-2">Cost Reduction</h4>
               <p className="text-gray-400 text-sm">Compared to hiring locally</p>
             </div>
 
